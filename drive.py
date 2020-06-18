@@ -1,5 +1,5 @@
-# import RPi.GPIO as GPIO # Import Raspberry Pi GPIO library
-import mock_GPIO as GPIO
+import RPi.GPIO as GPIO # Import Raspberry Pi GPIO library
+# import mock_GPIO as GPIO
 import threading
 
 def setup():
@@ -34,16 +34,16 @@ def go_back():
 def turn_right():
  print("Right")
  GPIO.output(31, GPIO.LOW)
- GPIO.output(33, GPIO.LOW)
+ GPIO.output(33, GPIO.HIGH)
  GPIO.output(35, GPIO.LOW)
- GPIO.output(37, GPIO.HIGH)
+ GPIO.output(37, GPIO.LOW)
 
 def turn_left():
  print("Left")
  GPIO.output(31, GPIO.LOW)
- GPIO.output(33, GPIO.HIGH)
+ GPIO.output(33, GPIO.LOW)
  GPIO.output(35, GPIO.LOW)
- GPIO.output(37, GPIO.LOW)
+ GPIO.output(37, GPIO.HIGH)
 
 def spin():
  print("Spin")
