@@ -19,31 +19,31 @@ def stop():
 
 def go_straight():
  print("Straight")
- GPIO.output(31, GPIO.LOW)
- GPIO.output(33, GPIO.HIGH)
- GPIO.output(35, GPIO.LOW)
- GPIO.output(37, GPIO.HIGH)
-
-def go_back():
- print("Back")
  GPIO.output(31, GPIO.HIGH)
  GPIO.output(33, GPIO.LOW)
  GPIO.output(35, GPIO.HIGH)
  GPIO.output(37, GPIO.LOW)
 
-def turn_right():
- print("Right")
+def go_back():
+ print("Back")
  GPIO.output(31, GPIO.LOW)
  GPIO.output(33, GPIO.HIGH)
  GPIO.output(35, GPIO.LOW)
- GPIO.output(37, GPIO.LOW)
+ GPIO.output(37, GPIO.HIGH)
 
-def turn_left():
- print("Left")
+def turn_right():
+ print("Right")
  GPIO.output(31, GPIO.LOW)
  GPIO.output(33, GPIO.LOW)
  GPIO.output(35, GPIO.LOW)
  GPIO.output(37, GPIO.HIGH)
+
+def turn_left():
+ print("Left")
+ GPIO.output(31, GPIO.LOW)
+ GPIO.output(33, GPIO.HIGH)
+ GPIO.output(35, GPIO.LOW)
+ GPIO.output(37, GPIO.LOW)
 
 def spin():
  print("Spin")
