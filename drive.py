@@ -90,3 +90,5 @@ def command(cmd):
         lightOn()
     elif cmd == b'lightOff':
         lightOff()
+    elif cmd == b'stop':
+        stop()
