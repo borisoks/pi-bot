@@ -5,10 +5,19 @@ import threading
 def setup():
  GPIO.setwarnings(False) # Ignore warning for now
  GPIO.setmode(GPIO.BOARD)
+ GPIO.setup(8, GPIO.OUT, initial=GPIO.LOW) #LED
  GPIO.setup(31, GPIO.OUT, initial=GPIO.LOW)
  GPIO.setup(33, GPIO.OUT, initial=GPIO.LOW)
  GPIO.setup(35, GPIO.OUT, initial=GPIO.LOW)
  GPIO.setup(37, GPIO.OUT, initial=GPIO.LOW)
+
+def lightOn():
+    print("lightOn")
+    GPIO.output(8, GPIO.HIGH)
+
+def lightOff():
+    print("lightOff")
+    GPIO.output(8, GPIO.LOW)
 
 def stop():
  print("Stop")
@@ -74,5 +83,9 @@ def command(cmd):
         turn_left()
     elif cmd == b'spin':
         spin()
+    elif cmd == b'lightOn':
+        lightOn()
+    elif cmd == b'lightOff':
+        lightOff()
     else:
         stop()
