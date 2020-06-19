@@ -12,11 +12,11 @@ def on_connect(client, userdata, flags, rc):
     # reconnect then subscriptions will be renewed.
     client.subscribe(topic)
 
-    sleep(1)
-    client.publish(topic, "lightOn")
+    drive.beepOn
+    drive.lightOn
     sleep(2)
-    client.publish(topic, "lightOff")
-
+    drive.beepOff
+    drive.lightOff
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):

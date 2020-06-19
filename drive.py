@@ -6,6 +6,7 @@ def setup():
  GPIO.setwarnings(False) # Ignore warning for now
  GPIO.setmode(GPIO.BOARD)
  GPIO.setup(8, GPIO.OUT, initial=GPIO.LOW) #LED
+ GPIO.setup(10, GPIO.OUT, initial=GPIO.LOW) #BUZZER
  GPIO.setup(31, GPIO.OUT, initial=GPIO.LOW)
  GPIO.setup(33, GPIO.OUT, initial=GPIO.LOW)
  GPIO.setup(35, GPIO.OUT, initial=GPIO.LOW)
@@ -18,6 +19,14 @@ def lightOn():
 def lightOff():
     print("lightOff")
     GPIO.output(8, GPIO.LOW)
+
+def beepOn():
+    print("beepOn")
+    GPIO.output(10, GPIO.HIGH)
+
+def beepOff():
+    print("beepOff")
+    GPIO.output(10, GPIO.LOW)
 
 def stop():
  print("Stop")
@@ -44,23 +53,15 @@ def turn_right():
  print("Right")
  GPIO.output(31, GPIO.LOW)
  GPIO.output(33, GPIO.HIGH)
- GPIO.output(35, GPIO.LOW)
+ GPIO.output(35, GPIO.HIGH)
  GPIO.output(37, GPIO.LOW)
 
 def turn_left():
  print("Left")
- GPIO.output(31, GPIO.LOW)
- GPIO.output(33, GPIO.LOW)
- GPIO.output(35, GPIO.LOW)
- GPIO.output(37, GPIO.HIGH)
-
-def spin():
- print("Spin")
  GPIO.output(31, GPIO.HIGH)
  GPIO.output(33, GPIO.LOW)
  GPIO.output(35, GPIO.LOW)
  GPIO.output(37, GPIO.HIGH)
-
 
 # timer = threading.Timer(0.5, stop)
 # timer.start()
@@ -81,11 +82,11 @@ def command(cmd):
         turn_right()
     elif cmd == b'left':
         turn_left()
-    elif cmd == b'spin':
-        spin()
+    elif cmd == b'beepOn':
+        beepOn()
+    elif cmd == b'beepOff':
+        beepOff()
     elif cmd == b'lightOn':
         lightOn()
     elif cmd == b'lightOff':
         lightOff()
-    else:
-        stop()
