@@ -2,6 +2,7 @@ import drive
 import paho.mqtt.client as mqtt
 from time import sleep # Import the sleep function from the time module
 
+topic = "pi-bot/move"
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
@@ -9,13 +10,12 @@ def on_connect(client, userdata, flags, rc):
 
     # Subscribing in on_connect() means that if we lose the connection and
     # reconnect then subscriptions will be renewed.
-    client.subscribe("pi-bot/move")
+    client.subscribe(topic)
 
     sleep(1)
-    client.publish("pi-bot/move", "straight")
-
-    sleep(4)
-    client.publish("pi-bot/move", "left")
+    client.publish(topic, "lightOn")
+    sleep(2)
+    client.publish(topic, "lightOff")
 
 
 # The callback for when a PUBLISH message is received from the server.
