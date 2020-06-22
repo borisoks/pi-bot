@@ -18,7 +18,7 @@ def on_connect(client, userdata, flags, rc):
 
     drive.beepOn()
     drive.lightOn()
-    sleep(2)
+    sleep(0.5)
     drive.beepOff()
     drive.lightOff()
 
