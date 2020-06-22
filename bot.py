@@ -1,8 +1,12 @@
 import drive
 import paho.mqtt.client as mqtt
 from time import sleep # Import the sleep function from the time module
+from picamera import PiCamera
+
+camera = PiCamera()
 
 topic = "pi-bot/move"
+photoTopic = "pi-bot/photo"
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
@@ -21,7 +25,21 @@ def on_connect(client, userdata, flags, rc):
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
     print("mqtt.on_message: topic= " + msg.topic + " message: " + str(msg.payload))
-    drive.command(msg.payload)
+    m = msg.payload
+    if m == b'photo':
+        imgLocation = '/home/pi/pi-bot/img.jpg'
+        camera.resolution = (200, 200)
+        camera.framerate = 15
+        camera.start_preview()
+        sleep(3)
+        camera.capture(imgLocation)
+        camera.stop_preview()
+
+        with open(imgLocation) as fp:
+            imgData = fp.read()
+            client.publish(photoTopic, imgData)
+    else:
+        drive.command(msg.payload)
 
 client = mqtt.Client()
 client.on_connect = on_connect
