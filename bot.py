@@ -16,11 +16,18 @@ def on_connect(client, userdata, flags, rc):
     # reconnect then subscriptions will be renewed.
     client.subscribe(topic)
 
-    drive.beepOn
-    drive.lightOn
+    drive.beepOn()
+    drive.lightOn()
     sleep(2)
-    drive.beepOff
-    drive.lightOff
+    drive.beepOff()
+    drive.lightOff()
+
+    setupCamera()
+
+def setupCamera():
+    camera.resolution = (200, 200)
+    camera.framerate = 5
+    camera.start_preview()
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
@@ -29,12 +36,12 @@ def on_message(client, userdata, msg):
     if m == b'photo':
         print("Taking photo...")
         imgLocation = '/home/pi/pi-bot/img.jpg'
-        camera.resolution = (200, 200)
-        camera.framerate = 15
-        camera.start_preview()
-        sleep(3)
+        # camera.resolution = (200, 200)
+        # camera.framerate = 15
+        # camera.start_preview()
+        # sleep(3)
         camera.capture(imgLocation)
-        camera.stop_preview()
+        # camera.stop_preview()
 
         with open(imgLocation) as fp:
             imgData = fp.read()
