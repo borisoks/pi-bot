@@ -24,9 +24,10 @@ def on_connect(client, userdata, flags, rc):
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
-    print("mqtt.on_message: topic= " + msg.topic + " message: " + str(msg.payload))
-    m = msg.payload
+    m = str(msg.payload)
+    print("mqtt.on_message: topic= " + msg.topic + " message: " + m)
     if m == b'photo':
+        print("Taking photo...")
         imgLocation = '/home/pi/pi-bot/img.jpg'
         camera.resolution = (200, 200)
         camera.framerate = 15
@@ -38,8 +39,10 @@ def on_message(client, userdata, msg):
         with open(imgLocation) as fp:
             imgData = fp.read()
             client.publish(photoTopic, imgData)
+            print("Published photo to " + photoTopic)
+
     else:
-        drive.command(msg.payload)
+        drive.command(m)
 
 client = mqtt.Client()
 client.on_connect = on_connect
