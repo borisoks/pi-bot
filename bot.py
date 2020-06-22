@@ -25,6 +25,7 @@ def on_connect(client, userdata, flags, rc):
     setupCamera()
 
 def setupCamera():
+    camera.vflip = True
     camera.resolution = (200, 200)
     camera.framerate = 5
     camera.start_preview()
